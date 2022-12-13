@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formularios</title>
+
+    <style>
+       
+       fieldset{
+         margin: auto;
+         text-align: center;
+         width:400px;
+         border-radius: 12px;
+       }
+
+       body{
+        margin-top: 200px;
+       }
+
+    </style>
+</head>
+
+<body>
+    
+    <fieldset> <legend>Dados Pessoais</legend>
+
+    <form action="#" method="POST">
+    
+    <label for="nome">Nome:</label>   <input type="text" name="nome" id="nome" size="28" placeholder="Nome Completo"><br><br>
+    <label for="email">Email:</label> <input type="email" name="email" id="email" size="28" placeholder="Email"><br> <br>
+    <label for="cpf">CPF:</label>     <input type="text" name="cpf" id="cpf" size="30" placeholder="11 digitos"><br> <br>
+    <label for="senha">Senha:</label> <input type="password" name="senha" id="senha" size="28" placeholder="8 digitos"><br><br>
+    <input type="submit" name="btn-submit" value="Enviar">
+
+    </form>
+    </fieldset>
+
+   <?php
+
+       //Banco de dados Mysql - DataBase: formularios
+
+       //CREATE TABLE cadastro_PHP(
+       //id INT NOT NULL AUTO_INCREMENT,
+       //Nome VARCHAR (90) NOT NULL,
+       //Email VARCHAR(90) NOT NULL,
+       //CPF VARCHAR(12) NOT NULL,
+       //Senha VARCHAR (12) NOT NULL,
+       //PRIMARY KEY(id));
+
+       //Teste de conexão entre o Banco de dados e a linguagem PHP
+
+       $dbHost = 'localhost';
+       $dbUsername = 'root';
+       $dbpassword = '';
+       $dbDataBase = 'formularios';
+
+       $conexao = new Mysqli($dbHost, $dbUsername, $dbpassword, $dbDataBase);
+     
+       if($conexao->connect_errno){
+        //echo "Falha na conexão.";
+        //} else {
+        //echo "Conexão realizada com sucesso.";
+       }
+     
+       //Teste de envio de dados através do método POST
+
+       if(isset($_POST['btn-submit'])){
+        //echo "Dados enviados com sucesso.";
+        //} else{
+        //echo "Erro no envio de dados.";
+        //}
+      
+       //Envio de dados preenchidos pelo usuário para o Banco de dados
+        $nome = $_POST['nome'];
+        $email = $_POST['email'];
+        $cpf = $_POST['cpf'];
+        $senha = $_POST['senha'];
+
+        $result = mysqli_query($conexao, "INSERT INTO cadastro_PHP(Nome, Email, CPF, Senha) 
+        VALUES('$nome', '$email', '$cpf', '$senha')");
+       }
+    
+    ?>
+    
+  </body>
+</html>
